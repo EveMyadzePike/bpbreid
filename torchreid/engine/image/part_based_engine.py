@@ -19,6 +19,8 @@ from ...utils.torchtools import collate
 from ...utils.visualization.feature_map_visualization import display_feature_maps
 
 
+
+#This is the specific engine that matters
 class ImagePartBasedEngine(Engine):
     r"""Training/testing engine for part-based image-reid.
     """
@@ -74,7 +76,9 @@ class ImagePartBasedEngine(Engine):
         self.loss_timer = self.writer.loss_timer
         self.optimizer_timer = self.writer.optimizer_timer
 
+    #This is the heart of training
     def forward_backward(self, data):
+        #This is the data that matters
         imgs, target_masks, pids, imgs_path = self.parse_data_for_train(data)
 
         # feature extraction
@@ -184,6 +188,8 @@ class ImagePartBasedEngine(Engine):
         rerank=False,
         save_features=False
     ):
+
+        #gallery and query matter
         print('Extracting features from query set ...')
         qf, q_pids, q_camids, qf_parts_visibility, q_parts_masks, q_pxl_scores_, q_anns = self._feature_extraction(query_loader)
         print('Done, obtained {} tensor'.format(qf.shape))
